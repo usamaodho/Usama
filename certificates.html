@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Coursera Certifications</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.8);
+            font-weight: 300;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4ecdc4;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .cert-hex {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 25px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(20px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            animation: certAppear 0.8s ease-out forwards;
+        }
+
+        .cert-hex:nth-child(1) { animation-delay: 0.1s; }
+        .cert-hex:nth-child(2) { animation-delay: 0.2s; }
+        .cert-hex:nth-child(3) { animation-delay: 0.3s; }
+        .cert-hex:nth-child(4) { animation-delay: 0.4s; }
+
+        .cert-hex::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cert-hex:hover::before {
+            opacity: 1;
+        }
+
+        .cert-hex:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        .cert-image-container {
+            position: relative;
+            height: 250px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cert-image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,107,107,0.1), rgba(78,205,196,0.1));
+            z-index: 1;
+        }
+
+        .cert-placeholder {
+            font-size: 4rem;
+            opacity: 0.6;
+            z-index: 2;
+            position: relative;
+        }
+
+        .cert-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            z-index: 2;
+            position: relative;
+        }
+
+        .cert-hex:hover .cert-image {
+            transform: scale(1.1);
+        }
+
+        .cert-content {
+            z-index: 2;
+            position: relative;
+        }
+
+        .cert-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        .cert-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .cert-provider {
+            font-size: 1rem;
+            color: #4ecdc4;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .cert-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .cert-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(78,205,196,0.2);
+            border-color: #4ecdc4;
+            transform: translateY(-2px);
+        }
+
+        .cert-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cert-date {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+            font-weight: 500;
+        }
+
+        .cert-progress {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(#4ecdc4 0deg, #4ecdc4 324deg, rgba(255,255,255,0.1) 324deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #45b7d1, #96ceb4);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            top: 20%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #ff6b6b, #45b7d1);
+            border-radius: 50%;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes certAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(90deg); }
+            50% { transform: translateY(-40px) rotate(180deg); }
+            75% { transform: translateY(-20px) rotate(270deg); }
+        }
+
+        @media (max-width: 768px) {
+            .certificates-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Professional Certifications</h1>
+            <p>Advancing skills through continuous learning and development</p>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Certificates</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">120+</div>
+                <div class="stat-label">Hours Learned</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Skills Gained</div>
+            </div>
+        </div>
+
+        <div class="certificates-grid">
+            <div class="cert-hex">
+                <div class="cert-image-container">
+                    <img class="cert-image" src="Images/COMMUNICATION WITH STAKEHOLDERS.png" alt="Data Analytics Certificate">
+                    <div class="cert-placeholder">🤖</div>
+                </div>
+                <div class="cert-content">
+                    <div class="cert-badge">Data Analysis</div>
+                    <h3 class="cert-title">Communication with stakeholders</h3>
+                    <p class="cert-provider">Microsoft</p>
+                    <p class="cert-description">
+                       Completed specialized training on aligning stakeholder expectations, building trust, and enhancing collaboration throughout the project lifecycle.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">Stakeholder</span>
+                        <span class="skill-tag">Communication</span>
+                        <span class="skill-tag">Project Lifecycle</span>
+                        <span class="skill-tag">Leardership</span>
+                    </div>
+                    <div class="cert-footer">
+                        <span class="cert-date">9 July 2025</span>
+                        <div class="cert-progress">70%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-hex">
+                <div class="cert-image-container">
+                    <img class="cert-image" src="Images/DATA DATA EVERYWHERE.png" alt="Google Data Analytics Certificate">
+                    <div class="cert-placeholder">📊</div>
+                </div>
+                <div class="cert-content">
+                    <div class="cert-badge">Data Analytics</div>
+                    <h3 class="cert-title">Google Data Analytics Professional Certificate</h3>
+                    <p class="cert-provider">Google</p>
+                    <p class="cert-description">
+                        Comprehensive program covering data collection, cleaning, analysis, and visualization. 
+                        Learned to create impactful dashboards and present data-driven insights to stakeholders.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">R Programming</span>
+                        <span class="skill-tag">Data Viz</span>
+                    </div>
+                    <div class="cert-footer">
+                        <span class="cert-date">January 2024</span>
+                        <div class="cert-progress">85%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-hex">
+                <div class="cert-image-container">
+                    <img class="cert-image" src="Images/DATA ANALYSIS WITH PYTHON.png" alt="Google Data Analytics Certificate">
+                    <div class="cert-placeholder">📊</div>
+                </div>
+                <div class="cert-content">
+                    <div class="cert-badge">Data Analytics</div>
+                    <h3 class="cert-title">Data Analysis with python</h3>
+                    <p class="cert-provider">Simplilearn</p>
+                    <p class="cert-description">
+                        Comprehensive program covering data collection, cleaning, analysis, and visualization. 
+                        Learned to create impactful dashboards and present data-driven insights to stakeholders.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">R Programming</span>
+                        <span class="skill-tag">Data Viz</span>
+                    </div>
+                    <div class="cert-footer">
+                        <span class="cert-date">January 2024</span>
+                        <div class="cert-progress">90%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-hex">
+                <div class="cert-image-container">
+                    <img class="cert-image" src="Images/MySQL FOR DATA ANALYSIS.png" alt="Google Data Analytics Certificate">
+                    <div class="cert-placeholder">📊</div>
+                </div>
+                <div class="cert-content">
+                    <div class="cert-badge">Data Analytics</div>
+                    <h3 class="cert-title">MySQL for Data Analytics & Business Intelligence</h3>
+                    <p class="cert-provider">Edureca!</p>
+                    <p class="cert-description">
+                        Comprehensive program covering data collection, cleaning, analysis, and visualization. 
+                        Learned to create impactful dashboards and present data-driven insights to stakeholders.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">R Programming</span>
+                        <span class="skill-tag">Data Viz</span>
+                    </div>
+                    <div class="cert-footer">
+                        <span class="cert-date">January 2024</span>
+                        <div class="cert-progress">95%</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="cert-hex">
+                <div class="cert-image-container">
+                    <img class="cert-image" src="Images/certificate5.png" alt="Google Data Analytics Certificate">
+                    <div class="cert-placeholder">📊</div>
+                </div>
+                <div class="cert-content">
+                    <div class="cert-badge">Data Analytics</div>
+                    <h3 class="cert-title">Google Data Analytics Professional Certificate</h3>
+                    <p class="cert-provider">Google</p>
+                    <p class="cert-description">
+                        Comprehensive program covering data collection, cleaning, analysis, and visualization. 
+                        Learned to create impactful dashboards and present data-driven insights to stakeholders.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">R Programming</span>
+                        <span class="skill-tag">Data Viz</span>
+                    </div>
+                    <div class="cert-footer">
+                        <span class="cert-date">January 2024</span>
+                        <div class="cert-progress">95%</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="cert-hex">
+                <div class="cert-image-container">
+                    <img class="cert-image" src="Images/certificate6.png" alt="Google Data Analytics Certificate">
+                    <div class="cert-placeholder">📊</div>
+                </div>
+                <div class="cert-content">
+                    <div class="cert-badge">Data Analytics</div>
+                    <h3 class="cert-title">Google Data Analytics Professional Certificate</h3>
+                    <p class="cert-provider">Google</p>
+                    <p class="cert-description">
+                        Comprehensive program covering data collection, cleaning, analysis, and visualization. 
+                        Learned to create impactful dashboards and present data-driven insights to stakeholders.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">R Programming</span>
+                        <span class="skill-tag">Data Viz</span>
+                    </div>
+                    <div class="cert-footer">
+                        <span class="cert-date">January 2024</span>
+                        <div class="cert-progress">95%</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="cert-hex">
+                <div class="cert-image-container">
+                    <img class="cert-image" src="Images/certificate7.png" alt="Google Data Analytics Certificate">
+                    <div class="cert-placeholder">📊</div>
+                </div>
+                <div class="cert-content">
+                    <div class="cert-badge">Data Analytics</div>
+                    <h3 class="cert-title">Google Data Analytics Professional Certificate</h3>
+                    <p class="cert-provider">Google</p>
+                    <p class="cert-description">
+                        Comprehensive program covering data collection, cleaning, analysis, and visualization. 
+                        Learned to create impactful dashboards and present data-driven insights to stakeholders.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">R Programming</span>
+                        <span class="skill-tag">Data Viz</span>
+                    </div>
+                    <div class="cert-footer">
+                        <span class="cert-date">January 2024</span>
+                        <div class="cert-progress">95%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-hex">
+                <div class="cert-image-container">
+                    <img class="cert-image" src="Images/certificate8.png" alt="Full-Stack Web Development Certificate">
+                    <div class="cert-placeholder">💻</div>
+                </div>
+                <div class="cert-content">
+                    <div class="cert-badge">Web Development</div>
+                    <h3 class="cert-title">Full-Stack Web Development</h3>
+                    <p class="cert-provider">The Hong Kong University of Science and Technology</p>
+                    <p class="cert-description">
+                        Developed expertise in both frontend and backend technologies. Built responsive web applications 
+                        using modern frameworks and learned industry best practices for scalable development.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Express</span>
+                    </div>
+                    <div class="cert-footer">
+                        <span class="cert-date">November 2023</span>
+                        <div class="cert-progress">85%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cert-hex">
+                <div class="cert-image-container">
+                    <img class="cert-image" src="Images/certificate9.png" alt="AWS Cloud Practitioner Certificate">
+                    <div class="cert-placeholder">☁️</div>
+                </div>
+                <div class="cert-content">
+                    <div class="cert-badge">Cloud Computing</div>
+                    <h3 class="cert-title">AWS Cloud Practitioner Essentials</h3>
+                    <p class="cert-provider">Amazon Web Services</p>
+                    <p class="cert-description">
+                        Gained foundational knowledge of AWS cloud services, architecture patterns, and security best practices. 
+                        Learned to design and deploy scalable, cost-effective cloud solutions.
+                    </p>
+                    <div class="cert-skills">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Cloud Architecture</span>
+                        <span class="skill-tag">EC2</span>
+                        <span class="skill-tag">S3</span>
+                    </div>
+                    <div class="cert-footer">
+                        <span class="cert-date">September 2023</span>
+                        <div class="cert-progress">80%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.cert-hex').forEach(cert => {
+            observer.observe(cert);
+        });
+
+        // Interactive hover effects
+        document.querySelectorAll('.cert-hex').forEach(cert => {
+            cert.addEventListener('mouseenter', () => {
+                const shapes = document.querySelectorAll('.shape');
+                shapes.forEach(shape => {
+                    shape.style.animationDuration = '4s';
+                });
+            });
+
+            cert.addEventListener('mouseleave', () => {
+                const shapes = document.querySelectorAll('.shape');
+                shapes.forEach(shape => {
+                    shape.style.animationDuration = '8s';
+                });
+            });
+        });
+
+        // Dynamic background effect
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const bgPattern = document.querySelector('.bg-pattern');
+            bgPattern.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+        });
+
+        // Animate progress circles
+        document.querySelectorAll('.cert-progress').forEach(progress => {
+            const percentage = progress.textContent;
+            const degrees = (parseInt(percentage) / 100) * 360;
+            
+            progress.style.background = `conic-gradient(#4ecdc4 0deg, #4ecdc4 ${degrees}deg, rgba(255,255,255,0.1) ${degrees}deg)`;
+        });
+
+        // Handle image loading and fallback to placeholder
+        document.querySelectorAll('.cert-image').forEach(img => {
+            img.addEventListener('load', function() {
+                this.style.display = 'block';
+                this.nextElementSibling.style.display = 'none';
+            });
+            
+            img.addEventListener('error', function() {
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+            });
+        });
+    </script>
+</body>
+</html>
