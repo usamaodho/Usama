@@ -287,68 +287,24 @@ section{
 
 .img-hero img{
     position: relative;
-    width: 400px;
-    height: auto;
+    width: 380px;
+    height: 380px;
+    object-fit: cover;
     z-index: 10;
-}
-
-.rotate-text{
-    position: absolute;
-    top: 4%;
-    left: -53px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    padding: 2rem;
-}
-
-.rotate-text span{
-    position: relative;
-    width: 442px;
-    height: 442px;
-    background: red;
-    border: 6px solid #eaeef0;
     border-radius: 50%;
-    z-index: 1;
-    overflow: hidden;
-}
-
-.rotate-text span::before{
-    content: "";
-    position: absolute;
-    inset: 20px;
-    background: #00aaff;
-    border-radius: 50%;
-    z-index: 1;
-}
-
-.rotate-text span i{
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-color-bg);
-    filter: blur(5px);
-    animation: animate 2s linear infinite;
-}
-
-
-.rotate-text .text{
-    position: absolute;
-    width: 490px;
-    height: 490px;
-    background: #f2f6fb;
-    border-radius: 50%;
-    box-shadow: 0 1px 6px 5.94px rgba(0,0,0,0.2);
-    animation: rotateText 30s linear infinite;
-}
-
-.text b{
-    position: absolute;
-    transform-origin: 0 247px;
+    border: 8px solid #ffffff;
+    box-shadow: 0 18px 50px rgba(20,30,50,0.12), 0 6px 18px rgba(0,0,0,0.06);
     display: block;
-    top: 0;
-    left: 50%;
-    font-size: 1.2rem;
+}
+
+/* Hide decorative rotating ring that was behind the hero image (removed for cleaner look) */
+.rotate-text,
+.rotate-text span,
+.rotate-text span::before,
+.rotate-text span i,
+.rotate-text .text,
+.rotate-text .text b{
+    display: none !important;
 }
 
 /* ==================== About section css code ============================ */
@@ -361,23 +317,81 @@ section{
 
 .about .about-img{
     position: relative;
+    /* constrain the visual block so image looks intentional and balanced */
+    min-width: 320px;
+    max-width: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem;
 }
 
 .about .about-img .aboutHero{
-    width: 40vw;
+    /* keep image sharp and consistent regardless of source aspect ratio */
+    width: 100%;
+    max-width: 520px;
+    height: 520px;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 20px 50px rgba(8,20,40,0.12), 0 6px 20px rgba(0,0,0,0.06);
+    border: 8px solid #ffffff;
+    z-index: 2; /* make sure it sits above decorative shapes */
+    display: block;
+}
+
+/* decorative ring/circle behind the about image: smaller, subtle and placed behind the image */
+.about-img .showcase-ring .ring{
+    position: absolute;
+    right: -6%;
+    top: -6%;
+    width: 520px;
     height: auto;
+    z-index: 1;
+    opacity: 0.95;
+    filter: drop-shadow(0 12px 30px rgba(10,20,40,0.08));
 }
 
-.about-img .ring{
+.about-img .showcase-ring .circle{
     position: absolute;
-    top: 22%;
-    right: 1%;
+    left: -6%;
+    bottom: -6%;
+    width: 140px;
+    height: auto;
+    z-index: 1;
+    filter: blur(1px) saturate(1.05);
+    opacity: 0.9;
 }
 
-.about-img .circle{
-    position: absolute;
-    top: 0%;
-    left: 0%;
+/* On smaller screens keep the about image responsive and hide large decorative ring to avoid overlap */
+@media (max-width: 991px){
+    .about .about-img .aboutHero{
+        max-width: 460px;
+        height: 460px;
+        border-radius: 14px;
+    }
+    .about-img .showcase-ring .ring{
+        display: none;
+    }
+    .proposal img,
+    .proposal img.first{
+        max-width: 460px;
+        height: 460px;
+        margin: -3rem 0 0;
+    }
+}
+
+@media (max-width: 576px){
+    .about .about-img .aboutHero{
+        width: 100%;
+        max-width: 340px;
+        height: 340px;
+    }
+    .proposal img,
+    .proposal img.first{
+        max-width: 340px;
+        height: 340px;
+        margin: -2rem 0 0;
+    }
 }
 
 
@@ -561,10 +575,33 @@ section{
 }
 
 .proposal img{
-    width: 40vw;
-    height: auto;
+    /* Make the support image visually consistent with the hero/about images */
+    width: auto;
+    max-width: 520px;
+    height: 520px;
+    object-fit: cover;
     margin: -4rem 0 0;
     z-index: 2;
+    border-radius: 14px;
+    border: 8px solid #ffffff;
+    box-shadow: 0 20px 50px rgba(8,20,40,0.12), 0 6px 18px rgba(0,0,0,0.06);
+    display: block;
+}
+
+/* specific class used in HTML for the support image */
+.proposal img.first{
+    /* small tweak if the element has .first class */
+    max-width: 560px;
+    height: 560px;
+}
+
+@media (max-width: 991px){
+    .proposal img,
+    .proposal img.first{
+        max-width: 320px;
+        height: 320px;
+        margin: -2rem 0 0;
+    }
 }
 
 .services .text-box span{
