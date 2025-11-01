@@ -312,7 +312,7 @@ section{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .about .about-img{
@@ -334,33 +334,12 @@ section{
     object-fit: cover;
     border-radius: 18px;
     box-shadow: 0 20px 50px rgba(8,20,40,0.12), 0 6px 20px rgba(0,0,0,0.06);
-    border: 8px solid #ffffff;
+    border: 5px solid #ffffff;
     z-index: 2; /* make sure it sits above decorative shapes */
     display: block;
 }
 
-/* decorative ring/circle behind the about image: smaller, subtle and placed behind the image */
-.about-img .showcase-ring .ring{
-    position: absolute;
-    right: -6%;
-    top: -6%;
-    width: 520px;
-    height: auto;
-    z-index: 1;
-    opacity: 0.95;
-    filter: drop-shadow(0 12px 30px rgba(10,20,40,0.08));
-}
 
-.about-img .showcase-ring .circle{
-    position: absolute;
-    left: -6%;
-    bottom: -6%;
-    width: 140px;
-    height: auto;
-    z-index: 1;
-    filter: blur(1px) saturate(1.05);
-    opacity: 0.9;
-}
 
 /* On smaller screens keep the about image responsive and hide large decorative ring to avoid overlap */
 @media (max-width: 991px){
@@ -574,25 +553,13 @@ section{
     z-index: 1;
 }
 
-.proposal img{
-    /* Make the support image visually consistent with the hero/about images */
-    width: auto;
-    max-width: 520px;
-    height: 520px;
-    object-fit: cover;
-    margin: -4rem 0 0;
-    z-index: 2;
-    border-radius: 14px;
-    border: 8px solid #ffffff;
-    box-shadow: 0 20px 50px rgba(8,20,40,0.12), 0 6px 18px rgba(0,0,0,0.06);
-    display: block;
-}
+
 
 /* specific class used in HTML for the support image */
-.proposal img.first{
+.first{
     /* small tweak if the element has .first class */
-    max-width: 560px;
-    height: 560px;
+    max-width: 500px;
+    height: 250px;
 }
 
 @media (max-width: 991px){
@@ -770,10 +737,12 @@ section{
 
 .card img{
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-height: 420px; /* limit certificate card height */
+    height: auto;
+    object-fit: contain;
     transition: .3s;
     display: block;
+    margin: 0 auto;
 }
 
 .card:hover img{
