@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VisuaLync - Data Visualization & Dashboard Platform</title>
+    <title>DataClean - Professional Data Cleaning Services</title>
     <style>
         * {
             margin: 0;
@@ -13,10 +13,9 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            color: #1e1e1e;
+            color: #2c3e50;
             line-height: 1.6;
-            background: #fafbfc;
-            overflow-x: hidden;
+            background: #f8f9fa;
         }
 
         /* Navigation */
@@ -24,21 +23,19 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(20px);
-            padding: 1.4rem 5%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .logo {
-            font-size: 1.9rem;
-            font-weight: 900;
-            letter-spacing: -0.8px;
+            font-size: 1.8rem;
+            font-weight: 700;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -48,90 +45,43 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 3.2rem;
+            gap: 2.5rem;
         }
 
         nav a {
             text-decoration: none;
-            color: #1e1e1e;
+            color: #2c3e50;
             font-size: 0.95rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            position: relative;
+            transition: color 0.3s;
         }
 
-        nav a::before {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s;
-            border-radius: 2px;
-        }
-
-        nav a:hover::before {
-            width: 100%;
+        nav a:hover {
+            color: #667eea;
         }
 
         /* Hero Section */
         .hero {
-            margin-top: 90px;
-            padding: 6.5rem 5% 3.5rem;
-            background: linear-gradient(135deg, #ffffff 0%, #f5f7ff 50%, #faf8ff 100%);
+            margin-top: 80px;
+            padding: 6rem 5% 4rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f7ff 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 5.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -200px;
-            right: -150px;
-            width: 900px;
-            height: 900px;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -100px;
-            left: -100px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(118, 75, 162, 0.06) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 7s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(30px) scale(1.05); }
+            gap: 4rem;
         }
 
         .hero-content {
             flex: 1;
-            z-index: 10;
-            animation: slideInUp 0.9s ease-out;
+            animation: slideInLeft 0.8s ease-out;
         }
 
         .hero h1 {
-            font-size: 4.2rem;
-            font-weight: 950;
-            line-height: 1.15;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
             margin-bottom: 1.5rem;
-            color: #0a0a0a;
-            letter-spacing: -1.2px;
+            color: #1a202c;
         }
 
         .gradient-text {
@@ -142,550 +92,252 @@
         }
 
         .hero p {
-            font-size: 1.35rem;
-            color: #555;
-            margin-bottom: 2.8rem;
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2rem;
             line-height: 1.8;
-            font-weight: 400;
-        }
-
-        .highlights {
-            display: flex;
-            gap: 2.5rem;
-            margin-bottom: 3.5rem;
-            flex-wrap: wrap;
-        }
-
-        .highlight {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .highlight-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-            flex-shrink: 0;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
-        }
-
-        .highlight-text h3 {
-            font-size: 0.95rem;
-            color: #1e1e1e;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-        }
-
-        .highlight-text p {
-            font-size: 0.85rem;
-            color: #888;
-            margin: 0;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 1.8rem;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
         .btn {
-            padding: 1.2rem 3rem;
+            padding: 1rem 2.5rem;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 1rem;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
-            letter-spacing: 0.4px;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 22px 55px rgba(102, 126, 234, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         }
 
         .btn-secondary {
             background: white;
             color: #667eea;
-            border: 2.5px solid #667eea;
-            font-weight: 700;
+            border: 2px solid #667eea;
         }
 
         .btn-secondary:hover {
             background: #f5f7ff;
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
-        .hero-visual {
+        .hero-image {
             flex: 1;
-            position: relative;
-            z-index: 10;
+            perspective: 1000px;
         }
 
-        .dashboard-mockup {
+        .data-visual {
             width: 100%;
-            height: 520px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.03) 0%, rgba(118, 75, 162, 0.03) 100%);
-            border-radius: 24px;
-            border: 2px solid rgba(102, 126, 234, 0.15);
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+            height: 500px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            animation: float 3s ease-in-out infinite;
         }
 
-        .dashboard-item {
-            background: white;
-            border-radius: 14px;
-            border: 1px solid rgba(102, 126, 234, 0.1);
-            padding: 1.5rem;
+        .data-cube {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            opacity: 0.9;
             display: flex;
-            flex-direction: column;
-            animation: popIn 0.6s ease-out forwards;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
         }
 
-        @keyframes popIn {
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes slideInLeft {
             from {
                 opacity: 0;
-                transform: scale(0.8) translateY(20px);
+                transform: translateX(-30px);
             }
             to {
                 opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .dashboard-item:nth-child(1) { animation-delay: 0.1s; }
-        .dashboard-item:nth-child(2) { animation-delay: 0.2s; }
-        .dashboard-item:nth-child(3) { animation-delay: 0.3s; }
-        .dashboard-item:nth-child(4) { animation-delay: 0.4s; }
-
-        .chart-label {
-            font-size: 0.85rem;
-            color: #999;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .mini-chart {
-            display: flex;
-            align-items: flex-end;
-            gap: 0.5rem;
-            flex: 1;
-            justify-content: space-around;
-            margin-bottom: 0.8rem;
-        }
-
-        .chart-bar {
-            width: 8%;
-            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-            border-radius: 4px 4px 0 0;
-            animation: growChart 1.5s ease-out forwards;
-            min-height: 20px;
-        }
-
-        @keyframes growChart {
-            from { height: 0; opacity: 0; }
-            to { height: 100%; opacity: 1; }
-        }
-
-        .chart-bar:nth-child(1) { animation-delay: 0.6s; height: 30%; }
-        .chart-bar:nth-child(2) { animation-delay: 0.7s; height: 50%; }
-        .chart-bar:nth-child(3) { animation-delay: 0.8s; height: 65%; }
-        .chart-bar:nth-child(4) { animation-delay: 0.9s; height: 40%; }
-
-        .dashboard-stat {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #667eea;
-            margin: auto 0;
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+                transform: translateX(0);
             }
         }
 
         /* Features Section */
         .features {
-            padding: 7rem 5% 6rem;
+            padding: 5rem 5%;
             background: white;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
         }
 
         .section-header h2 {
-            font-size: 3rem;
-            margin-bottom: 1.2rem;
-            color: #0a0a0a;
-            font-weight: 950;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
         }
 
         .section-header p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #666;
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
-            font-weight: 400;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .feature-card {
-            padding: 3rem;
-            background: linear-gradient(135deg, #ffffff 0%, #faf8ff 100%);
-            border-radius: 20px;
-            border: 1.5px solid rgba(102, 126, 234, 0.12);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
         }
 
         .feature-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
             border-color: rgba(102, 126, 234, 0.3);
         }
 
         .feature-icon {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 2rem;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 18px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: white;
-            box-shadow: 0 18px 36px rgba(102, 126, 234, 0.25);
         }
 
         .feature-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1.2rem;
-            color: #0a0a0a;
-            font-weight: 850;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #1a202c;
         }
 
         .feature-card p {
             color: #666;
             line-height: 1.8;
-            font-size: 0.98rem;
-        }
-
-        /* Dashboard Types Section */
-        .dashboard-types {
-            padding: 7rem 5% 6rem;
-            background: linear-gradient(135deg, #f9f7ff 0%, #faf8ff 100%);
-        }
-
-        .types-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
-        }
-
-        .type-card {
-            padding: 2.8rem;
-            background: white;
-            border-radius: 18px;
-            border: 1.5px solid rgba(102, 126, 234, 0.1);
-            text-align: center;
-            transition: all 0.3s;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-        }
-
-        .type-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.15);
-            border-color: rgba(102, 126, 234, 0.3);
-        }
-
-        .type-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-        }
-
-        .type-card h4 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            color: #0a0a0a;
-            font-weight: 850;
-        }
-
-        .type-card p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* Tools Section */
-        .tools {
-            padding: 7rem 5% 6rem;
-            background: white;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .tool-item {
-            text-align: center;
-            padding: 2.5rem;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #ffffff 0%, #faf8ff 100%);
-            border: 1.5px solid rgba(102, 126, 234, 0.1);
-            transition: all 0.3s;
-        }
-
-        .tool-item:hover {
-            transform: translateY(-8px);
-            border-color: rgba(102, 126, 234, 0.3);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.12);
-        }
-
-        .tool-logo {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tool-item h4 {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: #0a0a0a;
-            font-weight: 850;
-        }
-
-        .tool-item p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.7;
         }
 
         /* Benefits Section */
         .benefits {
-            padding: 7rem 5% 6rem;
-            background: linear-gradient(135deg, #f9f7ff 0%, #faf8ff 100%);
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, #f5f7ff 0%, #ffffff 100%);
         }
 
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.8rem;
-            margin-top: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
         }
 
         .benefit-item {
             display: flex;
-            gap: 2rem;
-            padding: 2.5rem;
-            background: white;
-            border-radius: 16px;
-            border: 1px solid rgba(102, 126, 234, 0.1);
-            transition: all 0.3s;
+            gap: 1.5rem;
         }
 
-        .benefit-item:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.12);
-        }
-
-        .benefit-number {
-            width: 60px;
-            height: 60px;
+        .benefit-check {
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 14px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 900;
-            font-size: 1.8rem;
+            font-weight: bold;
             flex-shrink: 0;
-            box-shadow: 0 12px 28px rgba(102, 126, 234, 0.2);
+            font-size: 1.5rem;
         }
 
         .benefit-content h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.6rem;
-            color: #0a0a0a;
-            font-weight: 850;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #1a202c;
         }
 
         .benefit-content p {
             color: #666;
             font-size: 0.95rem;
-            line-height: 1.7;
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 6rem 5%;
+            padding: 5rem 5%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             text-align: center;
             color: white;
-            position: relative;
-            overflow: hidden;
-            border-radius: 30px;
-            margin: 0 5% 6rem;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -5%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 10;
         }
 
         .cta-section h2 {
-            font-size: 3rem;
-            margin-bottom: 1.2rem;
-            font-weight: 950;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
         }
 
         .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2.8rem;
-            opacity: 0.98;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 400;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
         }
 
         .btn-light {
             background: white;
             color: #667eea;
-            padding: 1.3rem 3.8rem;
+            padding: 1.2rem 3rem;
             font-size: 1.05rem;
-            font-weight: 700;
-            letter-spacing: 0.4px;
         }
 
         .btn-light:hover {
             background: #f5f7ff;
-            transform: translateY(-4px);
+            transform: translateY(-3px);
         }
 
         /* Footer */
         footer {
-            background: #0a0a0a;
+            background: #1a202c;
             color: white;
-            padding: 5rem 5% 2.5rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3.5rem;
-        }
-
-        .footer-column h4 {
-            margin-bottom: 1.8rem;
-            font-size: 1.05rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 1rem;
-        }
-
-        .footer-column a {
-            color: #bbb;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .footer-column a:hover {
-            color: #667eea;
-        }
-
-        .footer-bottom {
+            padding: 3rem 5%;
             text-align: center;
-            padding-top: 2.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #888;
-            font-size: 0.9rem;
+        }
+
+        footer p {
+            opacity: 0.8;
         }
 
         @media (max-width: 768px) {
@@ -696,48 +348,38 @@
 
             .hero {
                 flex-direction: column;
-                padding: 5rem 5% 2rem;
+                padding: 5rem 5% 3rem;
                 min-height: auto;
-                gap: 3rem;
             }
 
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
 
             .hero p {
-                font-size: 1.1rem;
-            }
-
-            .highlights {
-                flex-direction: column;
-                gap: 1.5rem;
+                font-size: 1rem;
             }
 
             .cta-buttons {
                 flex-direction: column;
             }
 
-            .dashboard-mockup {
-                height: 350px;
-                grid-template-columns: 1fr;
+            .data-visual {
+                height: 300px;
             }
 
-            .section-header h2 {
-                font-size: 2.2rem;
-            }
-
-            .cta-section {
-                border-radius: 20px;
-                margin: 0 3% 4rem;
-            }
-
-            .cta-section h2 {
+            .data-cube {
+                width: 150px;
+                height: 150px;
                 font-size: 2rem;
             }
 
-            .features-grid {
-                grid-template-columns: 1fr;
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -745,11 +387,11 @@
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">VisuaLync</div>
+        <div class="logo">DataClean</div>
         <ul>
             <li><a href="#features">Features</a></li>
-            <li><a href="#dashboards">Dashboards</a></li>
-            <li><a href="#tools">Tools</a></li>
+            <li><a href="#benefits">Benefits</a></li>
+            <li><a href="#pricing">Pricing</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -757,61 +399,16 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Bring Data to Life with <span class="gradient-text">Stunning Visualizations</span></h1>
-            <p>Create beautiful, interactive dashboards and reports using Power BI and Tableau. Transform complex data into crystal-clear insights your team can act on immediately.</p>
-            
-            <div class="highlights">
-                <div class="highlight">
-                    <div class="highlight-icon">📊</div>
-                    <div class="highlight-text">
-                        <h3>Power BI</h3>
-                        <p>Advanced analytics</p>
-                    </div>
-                </div>
-                <div class="highlight">
-                    <div class="highlight-icon">📈</div>
-                    <div class="highlight-text">
-                        <h3>Tableau</h3>
-                        <p>Interactive dashboards</p>
-                    </div>
-                </div>
-                <div class="highlight">
-                    <div class="highlight-icon">⚡</div>
-                    <div class="highlight-text">
-                        <h3>Real-time</h3>
-                        <p>Live data updates</p>
-                    </div>
-                </div>
-            </div>
-
+            <h1>Transform Raw Data Into <span class="gradient-text">Flawless Perfection</span></h1>
+            <p>Fix errors, fill gaps, and remove duplicates with our professional data cleaning service. Get analysis-ready data in minutes, not days.</p>
             <div class="cta-buttons">
-                <button class="btn btn-primary">Start Free Trial</button>
-                <button class="btn btn-secondary">View Gallery</button>
+                <button class="btn btn-primary">Get Started Free</button>
+                <button class="btn btn-secondary">Watch Demo</button>
             </div>
         </div>
-        <div class="hero-visual">
-            <div class="dashboard-mockup">
-                <div class="dashboard-item">
-                    <div class="chart-label">Revenue</div>
-                    <div class="mini-chart">
-                        <div class="chart-bar"></div>
-                        <div class="chart-bar"></div>
-                        <div class="chart-bar"></div>
-                        <div class="chart-bar"></div>
-                    </div>
-                </div>
-                <div class="dashboard-item">
-                    <div class="chart-label">Growth</div>
-                    <div class="dashboard-stat">+42%</div>
-                </div>
-                <div class="dashboard-item">
-                    <div class="chart-label">Users</div>
-                    <div class="dashboard-stat">12.5K</div>
-                </div>
-                <div class="dashboard-item">
-                    <div class="chart-label">Performance</div>
-                    <div class="dashboard-stat">98%</div>
-                </div>
+        <div class="hero-image">
+            <div class="data-visual">
+                <div class="data-cube">✓</div>
             </div>
         </div>
     </section>
@@ -820,80 +417,104 @@
     <section class="features" id="features">
         <div class="section-header">
             <h2>Powerful Features</h2>
-            <p>Everything you need to create professional data visualizations</p>
+            <p>Everything you need to clean and prepare your data for analysis</p>
         </div>
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3>Custom Design</h3>
-                <p>Build fully customized dashboards with your brand colors, themes, and layouts that match your corporate identity perfectly.</p>
+                <div class="feature-icon">🔧</div>
+                <h3>Error Fixing</h3>
+                <p>Automatically detect and fix data inconsistencies, typos, and formatting errors across your entire dataset.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔄</div>
-                <h3>Multi-Source Integration</h3>
-                <p>Connect data from Excel, SQL, Salesforce, Google Analytics, and 100+ other sources seamlessly into one unified view.</p>
+                <div class="feature-icon">📊</div>
+                <h3>Gap Filling</h3>
+                <p>Intelligently fill missing values using advanced algorithms that preserve data integrity and statistical accuracy.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>Interactive Reports</h3>
-                <p>Create dynamic, drill-down reports that let users explore data at their own pace and uncover actionable insights.</p>
+                <div class="feature-icon">✂️</div>
+                <h3>Duplicate Removal</h3>
+                <p>Eliminate redundant records with intelligent pattern matching that handles complex data structures.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3>Mobile Responsive</h3>
-                <p>View and interact with your dashboards on any device—phone, tablet, or desktop—with perfect responsiveness.</p>
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Process millions of records in seconds with our optimized data processing engine.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">⏱️</div>
-                <h3>Real-time Updates</h3>
-                <p>Get live data streaming with automatic refresh rates. Monitor KPIs and metrics as they happen, not hours later.</p>
+                <div class="feature-icon">🔒</div>
+                <h3>Secure & Private</h3>
+                <p>Enterprise-grade encryption ensures your sensitive data stays protected at all times.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔐</div>
-                <h3>Security & Permissions</h3>
-                <p>Enterprise-grade security with role-based access control ensuring only authorized users see sensitive data.</p>
+                <div class="feature-icon">📈</div>
+                <h3>Analytics Ready</h3>
+                <p>Get perfectly formatted data optimized for seamless integration with your analysis tools.</p>
             </div>
         </div>
     </section>
 
-    <!-- Dashboard Types Section -->
-    <section class="dashboard-types" id="dashboards">
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
         <div class="section-header">
-            <h2>Dashboard Types</h2>
-            <p>Pre-built templates and custom solutions for any use case</p>
+            <h2>Why Choose DataClean?</h2>
+            <p>See the difference clean data makes</p>
         </div>
-        <div class="types-grid">
-            <div class="type-card">
-                <div class="type-icon">💼</div>
-                <h4>Executive Summary</h4>
-                <p>High-level KPI dashboards for executives and decision makers with key metrics at a glance.</p>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="benefit-check">✓</div>
+                <div class="benefit-content">
+                    <h4>90% Time Saved</h4>
+                    <p>Reduce manual data cleaning from weeks to hours with automation</p>
+                </div>
             </div>
-            <div class="type-card">
-                <div class="type-icon">📊</div>
-                <h4>Sales Analytics</h4>
-                <p>Track pipeline, revenue, forecasts, and team performance with detailed sales metrics and trends.</p>
+            <div class="benefit-item">
+                <div class="benefit-check">✓</div>
+                <div class="benefit-content">
+                    <h4>Improved Accuracy</h4>
+                    <p>Eliminate errors and inconsistencies for reliable analysis results</p>
+                </div>
             </div>
-            <div class="type-card">
-                <div class="type-icon">👥</div>
-                <h4>HR Metrics</h4>
-                <p>Monitor headcount, turnover, hiring pipeline, and employee engagement metrics in real-time.</p>
+            <div class="benefit-item">
+                <div class="benefit-check">✓</div>
+                <div class="benefit-content">
+                    <h4>Cost Effective</h4>
+                    <p>Reduce data processing costs and resource allocation significantly</p>
+                </div>
             </div>
-            <div class="type-card">
-                <div class="type-icon">📈</div>
-                <h4>Financial Reports</h4>
-                <p>Comprehensive financial dashboards with budget analysis, variance, and profit/loss visualizations.</p>
+            <div class="benefit-item">
+                <div class="benefit-check">✓</div>
+                <div class="benefit-content">
+                    <h4>Easy Integration</h4>
+                    <p>Seamlessly connect with your existing tools and workflows</p>
+                </div>
             </div>
-            <div class="type-card">
-                <div class="type-icon">🛒</div>
-                <h4>E-commerce Analytics</h4>
-                <p>Track sales, inventory, customer behavior, and conversion funnels across all channels.</p>
+            <div class="benefit-item">
+                <div class="benefit-check">✓</div>
+                <div class="benefit-content">
+                    <h4>24/7 Support</h4>
+                    <p>Expert support team always available to help with your needs</p>
+                </div>
             </div>
-            <div class="type-card">
-                <div class="type-icon">📞</div>
-                <h4>Customer Support</h4>
-                <p>Monitor support tickets, resolution times, satisfaction scores, and team performance metrics.</p>
+            <div class="benefit-item">
+                <div class="benefit-check">✓</div>
+                <div class="benefit-content">
+                    <h4>Scalable Solution</h4>
+                    <p>Handle datasets from KB to GB with consistent performance</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Tools Section -->
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Clean Your Data?</h2>
+        <p>Join thousands of businesses that trust DataClean for their data quality needs</p>
+        <button class="btn btn-light">Start Your Free Trial</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Usama odho. All rights reserved. | Privacy Policy | Terms of Service</p>
+    </footer>
+</body>
+</html>
